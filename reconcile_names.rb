@@ -14,7 +14,14 @@ CSV.foreach('FEC-2018-08-18T14_56_11.csv', :headers => true) do |row|
   name = row['name']
   mapping[district] ||= {}
   mapping[district][party] ||= {:fec => {}}
-  mapping[district][party][:fec][name] = row
+  if mapping[district][party][:fec][name]
+    #puts "Dupe: #{district} #{name} #{row['receipts']} #{mapping[district][party][:fec][name]['receipts']}"
+    if row['receipts'] > mapping[district][party][:fec][name]['receipts']
+      mapping[district][party][:fec][name] = row
+    end
+  else
+    mapping[district][party][:fec][name] = row
+  end
   rescue StandardError => e
     puts e.inspect
     puts row.inspect
@@ -47,11 +54,12 @@ c = CSV.generate do |csv|
         fec_candidates = types[:fec].keys
         os_candidates = types[:os].keys
         os_candidates.each do |os|
+          os = os.strip
           fec = FuzzyMatch.new(fec_candidates).find(os)
           #puts "#{district},#{party},#{os} : #{fec}"
           csv << [os, fec, district, party, types[:fec][fec]['receipts']] if fec
+          #binding.pry if os.start_with? "David Young"
         end
-        #binding.pry if district == 'NJ-12' && party == 'R'
       rescue StandardError => e
         puts e.inspect
         binding.pry
