@@ -44,6 +44,10 @@ require 'json'
         party['R'][2],
       ]
 
+      #if district == 'WI-4'
+        ##binding.pry
+        ##exit
+      #end
      rescue StandardError => e
         puts e.inspect
         binding.pry
