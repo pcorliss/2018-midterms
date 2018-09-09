@@ -5,7 +5,8 @@ require 'fuzzy_match'
 mapping = {}
 os_mapping = {}
 
-CSV.foreach('FEC-2018-08-18T14_56_11.csv', :headers => true) do |row|
+#CSV.foreach(ARGF.read, :headers => true) do |row|
+CSV.new(ARGF.file, :headers => true).each do |row|
   begin
     district_number = row['district_number']
     district_number = '1' if district_number.nil? || district_number.empty? || district_number.to_i == 0

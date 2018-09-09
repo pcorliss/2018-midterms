@@ -3,7 +3,7 @@ require 'pry'
 require 'json'
 
 
-  json = JSON.parse(File.read('538Forecast-2018-09-03.json'))
+  json = JSON.parse(ARGF.read)
 
   c = CSV.generate do |csv|
     csv << [
