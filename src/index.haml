@@ -40,7 +40,10 @@
               %tr
                 - select_headers.each do |header|
                   %td{class: "#{'ralign' if right_align.include?(header)}"}
-                    = row[header]
+                    - if header == 'Democrat'
+                      %a(href="#{row['Donation Links']}")= row[header]
+                    - else
+                      = row[header]
                 %td{'data-sort' => cook_mapping[row['Cook']]}
                   =row['Cook']
 
