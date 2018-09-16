@@ -10,7 +10,7 @@
     %script#tblsort(defer src="https://cdnjs.cloudflare.com/ajax/libs/tablesort/5.1.0/tablesort.min.js")
     %script(defer src="https://cdnjs.cloudflare.com/ajax/libs/tablesort/5.1.0/sorts/tablesort.number.min.js")
     :css
-      .ralign {
+      .table .ralign {
         text-align: right;
       }
   %body
@@ -23,22 +23,24 @@
           - select_headers = ["District", "Democrat", "D Funds", "538 D Wins %", "538 D $/%", "Republican", "R Funds", "538 R Wins %", "538 R $/%"]
           - display_headers = {"District" => "District", "Dem" => "Dem", "DemFunds" => "Funds", "DWinPct" => "538 %", "DEffective" => "$/%", "Rep" => "Rep", "RepFunds" => "Funds", "RWinPct" => "538 %", "REffective" => "$/%", "Cook" => "Cook"}
           - cook_mapping = { 'Solid D' => 1, 'Likely D' => 2, 'Lean D' => 3, 'Toss Up D' => 4, 'Toss Up R' => 5, 'Lean R' => 6, 'Likely R' => 7, 'Solid R' => 8 }
-          - right_align = Set.new(['D Funds', 'R Funds', '538 D $/%', '538 R $/%', '538 D Wins %', '538 R Wins %'])
+          - right_align = Set.new(['D Funds', 'R Funds', '538 D $/%', '538 R $/%', '538 D Wins %', '538 R Wins %', 'Funds', '538 %', '$/%'])
           %thead
             %tr
               - display_headers.each do |id, display|
-                %th{id: id, valign: 'center'}
+                %th{id: id, class: "#{'ralign' if right_align.include?(display)}"}
                   = display
                   %i.fas.fa-sort.sorter
           %tfoot
             %tr
               - display_headers.each do |id, display|
-                %th= display
+                %th{class: "#{'ralign' if right_align.include?(display)}"}
+                  = display
           %tbody
             - c.each do |row|
               %tr
                 - select_headers.each do |header|
-                  %td{class: "#{'ralign' if right_align.include?(header)}"}= row[header]
+                  %td{class: "#{'ralign' if right_align.include?(header)}"}
+                    = row[header]
                 %td{'data-sort' => cook_mapping[row['Cook']]}
                   =row['Cook']
 
