@@ -4,7 +4,7 @@
     %meta(charset="utf-8")
     %meta(name="viewport" content="width=device-width, initial-scale=1")
     %title
-      Effective Elections
+      Efficient Political Donations
     %link(rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css")
     %script(defer src="https://use.fontawesome.com/releases/v5.1.0/js/all.js")
     %script#tblsort(defer src="https://cdnjs.cloudflare.com/ajax/libs/tablesort/5.1.0/tablesort.min.js")
@@ -13,7 +13,76 @@
       .table .ralign {
         text-align: right;
       }
+      .footer {
+        background-color: #209cee;
+        color: #fff;
+      }
+      .footer .title {
+        color: #fff;
+      }
   %body
+    %section.hero.is-info
+      .hero-body
+        .container
+          %h1.title Efficient Political Donations
+
+
+    %section.section
+      .tile.is-ancestor
+        .tile.is-6.is-parent
+          %article.tile.is-child.notification
+            %p.title How Does This Work?
+            .content
+              %p
+                Listed below are all the competitive races for the 2018 US House elections. I've pulled
+                %a
+                  FEC data
+                and probability of win from
+                = succeed('.') do
+                  %a 538's House Forecast
+                Then sorted by dollars raise per percent win chance.
+                Competitive races are anything where the win percentage is between 15% and 85% probability.
+        .tile.is-parent
+          %article.tile.is-child.notification
+            %p.title How Much Should You Donate?
+            .content
+              %p
+                That's up to you and your budget. You may not have donated before or only donated a small amount.
+                But your funds can make an impact in the upcoming election.
+                I know that when the 2016 election was over I wondered if I could have done more.
+                In a big presidential election your dollars are dwarfed by lots and lots of donars but with smaller house races your money can be the tipping point that makes a difference.
+      .tile.is-ancestor
+        .tile.is-6.is-parent
+          %article.tile.is-child.notification
+            %p.title Who should I Select?
+            .content
+              %p
+                They're already pre-sorted by effectiveness, I'd start at the top and apply any metric you see fit.
+                My strategy was to pick 7 from the top of the list, and 3 more from house elections in my state.
+        .tile.is-parent
+          %article.tile.is-child.notification
+            %p.title How to Donate?
+            .content
+              %p
+                Select your preferred candidates below and .
+                Due to federal law your donations will be public and you'll need to provide your phone number and email address.
+                You'll also be added to every mailing and call list possible if you don't take some pre-emptive action:
+
+                %ul
+                  %li
+                    Setup a
+                    %a Google Voice
+                    number
+                  %li
+                    Append a
+                    %code +midterm2018
+                    to your gmail address. Ex.
+                    %a example+midterm2018@gmail.com
+
+                Those two tasks should keep your phone quiet and your inbox manageable.
+
+
+
     %section.section
       .container
         %table#tbl.table.is-striped.is-hoverable
@@ -21,7 +90,7 @@
           - require 'set'
           - c = CSV.read('EffectiveElections-2018-09-15.csv', :headers => true)
           - select_headers = ["District", "Democrat", "D Funds", "538 D Wins %", "538 D $/%", "Republican", "R Funds", "538 R Wins %", "538 R $/%"]
-          - display_headers = {"District" => "District", "Dem" => "Dem", "DemFunds" => "Funds", "DWinPct" => "538 %", "DEffective" => "$/%", "Rep" => "Rep", "RepFunds" => "Funds", "RWinPct" => "538 %", "REffective" => "$/%", "Cook" => "Cook"}
+          - display_headers = {"District" => "District", "Dem" => "Democrat", "DemFunds" => "Funds", "DWinPct" => "538 %", "DEffective" => "$/%", "Rep" => "Republican", "RepFunds" => "Funds", "RWinPct" => "538 %", "REffective" => "$/%", "Cook" => "Cook"}
           - cook_mapping = { 'Solid D' => 1, 'Likely D' => 2, 'Lean D' => 3, 'Toss Up D' => 4, 'Toss Up R' => 5, 'Lean R' => 6, 'Likely R' => 7, 'Solid R' => 8 }
           - right_align = Set.new(['D Funds', 'R Funds', '538 D $/%', '538 R $/%', '538 D Wins %', '538 R Wins %', 'Funds', '538 %', '$/%'])
           %thead
@@ -46,7 +115,20 @@
                       = row[header]
                 %td{'data-sort' => cook_mapping[row['Cook']]}
                   =row['Cook']
-
+    %footer.footer.is-info
+      .container
+        -#%p.title.has-text-centered
+          -#%a{href: 'https://www.paypal.me/pcorliss/5'}
+            -#Send $5 to Cover Hosting Costs
+        %p.title.has-text-centered
+          %strong Comments?
+        %p.has-text-centered
+          %a{target: '_blank', href: "https://twitter.com/intent/tweet?text=@pcorliss%20%23EfficientPol"}
+            %i.fab.fa-2x.fa-twitter(style="color:#fff")
+          %a{target: '_blank', href: "mailto:pcorliss@50projects.com?subject=EfficientPol"}
+            %i.fa.fa-2x.fa-envelope(style="color:#fff")
+          %a{target: '_blank', href: "https://www.reddit.com/message/compose/?to=pcorliss"}
+            %i.fab.fa-2x.fa-reddit(style="color:#fff")
   :javascript
     var script = document.querySelector('#tblsort');
     script.addEventListener('load', function() {
