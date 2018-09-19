@@ -35,4 +35,4 @@ end
 # notifications: true                send notifictions to Growl/libnotify/Notifu
 # haml_options: { ugly: true }    pass options to the Haml engine
 
-guard :haml, output: 'public', input: 'src'
+guard :haml, output: 'public', input: 'src', run_at_start: true

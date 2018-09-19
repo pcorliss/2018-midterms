@@ -35,11 +35,10 @@
             .content
               %p
                 Listed below are all the competitive races for the 2018 US House elections. I've pulled
-                %a
-                  FEC data
+                %a(href="https://www.fec.gov/data/candidates/house/") FEC data
                 and probability of win from
                 = succeed('.') do
-                  %a 538's House Forecast
+                  %a(href="https://projects.fivethirtyeight.com/2018-midterm-election-forecast/house/") 538's House Forecast
                 Then sorted by dollars raise per percent win chance.
                 Competitive races are anything where the win percentage is between 15% and 85% probability.
         .tile.is-parent
@@ -71,7 +70,7 @@
                 %ul
                   %li
                     Setup a
-                    %a Google Voice
+                    %a(href="https://voice.google.com/") Google Voice
                     number
                   %li
                     Append a
@@ -134,3 +133,8 @@
     script.addEventListener('load', function() {
       new Tablesort(document.querySelector('#tbl'));
     });
+  :javascript
+    var _gaq=[["_setAccount","UA-17879056-15"],["_trackPageview"]];
+    (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];g.async=1;
+    g.src=("https:"==location.protocol?"//ssl":"//www")+".google-analytics.com/ga.js";
+    s.parentNode.insertBefore(g,s)}(document,"script"));

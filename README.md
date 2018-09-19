@@ -30,3 +30,10 @@ cat FEC-2018-09-09.csv | ruby reconcile_names.rb  > reconciled.csv
 ```
 
 Upload `reconciled.csv` to [Google Sheet](https://docs.google.com/spreadsheets/d/12VeQDEjRfm_kxwnsfrfypOoLmJFBOl1IkPCM2l0vJ28/edit#gid=1569675494)
+
+## Deployment
+
+```
+guard # to run haml
+aws s3 cp --profile effective-elections --acl public-read public/index.html s3://effective-elections/index.html
+```
