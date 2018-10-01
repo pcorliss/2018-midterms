@@ -92,7 +92,7 @@
         %table#tbl.table.is-striped.is-hoverable
           - require 'csv'
           - require 'set'
-          - c = CSV.read('EffectiveElections-2018-09-15.csv', :headers => true)
+          - c = CSV.read('EffectiveElections-2018-09-30.csv', :headers => true)
           - select_headers = ["District", "Democrat", "D Funds", "538 D Wins %", "538 D $/%", "Republican", "R Funds", "538 R Wins %", "538 R $/%"]
           - display_headers = {"District" => "District", "Dem" => "Democrat", "DemFunds" => "Funds", "DWinPct" => "538 %", "DEffective" => "$/%", "Rep" => "Republican", "RepFunds" => "Funds", "RWinPct" => "538 %", "REffective" => "$/%", "Cook" => "Cook"}
           - cook_mapping = { 'Solid D' => 1, 'Likely D' => 2, 'Lean D' => 3, 'Toss Up D' => 4, 'Toss Up R' => 5, 'Lean R' => 6, 'Likely R' => 7, 'Solid R' => 8 }
